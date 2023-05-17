@@ -14,7 +14,9 @@ class Product(models.Model):
         (CHICKEN, CHICKEN),
     )
 
-    category = models.CharField(max_length=100, choices=CATEGORIES, default=BEEF)
+    category = models.CharField(max_length=100, 
+                                choices=CATEGORIES,
+                                default=BEEF)
     product_featured_image = CloudinaryField('image', default='placeholder')
     product_description = models.TextField()
     items = models.CharField(max_length=100, unique=True)
