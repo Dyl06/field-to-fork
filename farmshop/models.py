@@ -4,7 +4,17 @@ from cloudinary.models import CloudinaryField
 
 
 class Product(models.Model):
-    product = models.ForeignKey(User, on_delete=models.CASCADE, related_name='products')
+    BEEF = 'beef'
+    LAMB = 'lamb'
+    CHICKEN = 'chicken'
+
+    CATEGORIES = (
+        (BEEF, BEEF),
+        (LAMB, LAMB),
+        (CHICKEN, CHICKEN),
+    )
+
+    category = models.CharField(max_length=100, choices=CATEGORIES, default=BEEF)
     product_featured_image = CloudinaryField('image', default='placeholder')
     product_description = models.TextField()
     items = models.CharField(max_length=100, unique=True)
