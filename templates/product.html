@@ -1,7 +1,26 @@
-<h1>Hello World</h1>
-{% for product in products %}
+{% for product in beef_products %}
 {{ product.price }}
-{{ product.category }}
+{{ product.items }}
 {{ product.weight }}
+{{ product.CATEGORIES}}
+<br>
+<!-- {{ product.id }} -->
+<!-- {{ product.CATEGORIES }} -->
 {% endfor %}
-{{ category }}
+<br>
+{% for product in lamb_products %}
+{{ product.price }}
+{{ product.items }}
+{{ product.weight }}
+<!-- {{ product.id }} -->
+<br>
+{% endfor %}
+<br>
+{% for product in chicken_products %}
+{{ product.price }}
+{{ product.items }}
+{{ product.weight }}
+<!-- {{ product.id }} -->
+<br>
+{% endfor %}
+<br>
