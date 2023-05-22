@@ -15,7 +15,7 @@ class Product(models.Model):
         (CHICKEN, CHICKEN),
     )
 
-    category = models.CharField(max_length=100, 
+    category = models.CharField(max_length=100,
                                 choices=CATEGORIES,
                                 default=BEEF)
     product_featured_image = CloudinaryField('image', default='placeholder')
@@ -26,7 +26,6 @@ class Product(models.Model):
     weight = models.CharField(max_length=50)
     price = models.CharField(max_length=50)
     likes = models.ManyToManyField(User, related_name='item_likes', blank=True)
-    
 
     def __str__(self):
         return self.items
@@ -47,13 +46,11 @@ class Product(models.Model):
 class Order(models.Model):
     created_on = models.DateTimeField()
     user_id = models.ManyToManyField(User, related_name='user_id', blank=False)
-    product_id = models.ManyToManyField(Product, related_name='product_id', 
+    product_id = models.ManyToManyField(Product, related_name='product_id',
                                         blank=False)
-
 
 
 # class Customer(models.Model):
 #     first_name =
-#     last_name = 
+#     last_name =
 #     email =
-    

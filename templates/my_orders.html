@@ -1,3 +1,32 @@
-{{ order_list }}
-{{ user_id}}
-<h1>Hello World</h1>
+<h2>Orders</h2>
+
+    
+{% for order in order_list %}
+<h2>Order ID {{ order.id }}</h2>
+<table border=1>
+    <tr>
+        <td>Order ID</td>
+        <td>Time</td>
+    </tr>
+    <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ order.created_on }}</td>
+    </tr>
+</table>
+
+    <h3>Products in this order</h3>
+    <table border=1>
+        <tr>
+            <td>Product ID</td>
+            <td>Product Name</td>
+            <td>Price</td>
+        </tr>
+        {% for product in order.products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.items }}</td>
+                <td>{{ product.price }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endfor %}
