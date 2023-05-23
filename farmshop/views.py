@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_list_or_404
+from django.shortcuts import render, get_list_or_404, redirect
 from .models import Product, Order
 from django.contrib.auth.models import User
 from django.views import generic, View
@@ -64,13 +64,19 @@ class CategoryList(View):
 
 class OrderList(View):
 
-    def get(self, request, *args, **kwargs):
+    def get_orders(self, request):
         current_user_id = request.user.id
         queryset = Order.objects.filter(user_id=current_user_id)
         user_orders = get_list_or_404(queryset)
 
         for order in user_orders:
             order.products_list = order.products.all().values()
+
+        return user_orders
+
+    def get(self, request, *args, **kwargs):
+
+        user_orders = self.get_orders(request)
 
         return render(
             request,
@@ -80,19 +86,29 @@ class OrderList(View):
             },
         )
 
-    # def post(self, request, *args, **kwargs):
-    #     current_user_id = request.user.id
-    #     queryset = Order.objects.filter(user_id=current_user_id)
-    #     user_orders = get_list_or_404(queryset)
+    def post(self, request, *args, **kwargs):
 
-    #     ordered_items = order.products(data=request.POST)
-    #     for order in user_orders:
-    #         order.products = order.products.all().values()
+        # Check the action
+        action = request.POST['action']
 
-    #     return render(
-    #         request,
-    #         'my_orders.html',
-    #         {
-    #             "order_list": user_orders,
-    #         },
-    #     )
+        if action == "delete":
+
+        # Get order ID from POST from form
+        order_id = request.POST['order_id']
+
+        # Load the Order
+        order_obj = Order.objects.get(id=order_id)
+
+        # Delete the Order
+        order_obj.delete()
+
+        user_orders = self.get_orders(request)
+
+        return render(
+            request,
+            'my_orders.html',
+            {
+                "order_list": user_orders,
+                "message": f"Order Number {order_id}: Deleted Successfully"
+            },
+        )
