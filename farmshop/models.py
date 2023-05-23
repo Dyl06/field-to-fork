@@ -5,9 +5,9 @@ from cloudinary.models import CloudinaryField
 
 
 class Product(models.Model):
-    BEEF = 'Beef'
-    LAMB = 'Lamb'
-    CHICKEN = 'Chicken'
+    BEEF = 'beef'
+    LAMB = 'lamb'
+    CHICKEN = 'chicken'
 
     CATEGORIES = (
         (BEEF, BEEF),
@@ -24,7 +24,7 @@ class Product(models.Model):
     items_featured_image = CloudinaryField('image', default='placeholder')
     items_description = models.TextField()
     weight = models.CharField(max_length=50)
-    price = models.CharField(max_length=50)
+    price = models.IntegerField()
     likes = models.ManyToManyField(User, related_name='item_likes', blank=True)
 
     def __str__(self):
@@ -34,23 +34,18 @@ class Product(models.Model):
         return self.likes.count()
 
 
-# class Order(models.Model):
-#     order_number = models.UUIDField(primary_key=True, default=uuid.uuid4,
-#                                     editable=False)
-#     collection_date = models.DateTimeField()
-#     order_items = models.Choices()
-#     customer_name = models.TextField()
-#     customer_email = models.EmailField()
-
-
 class Order(models.Model):
     created_on = models.DateTimeField()
-    user_id = models.ManyToManyField(User, related_name='user_id', blank=False)
-    product_id = models.ManyToManyField(Product, related_name='product_id',
-                                        blank=False)
+    user_id = models.ForeignKey(User, related_name='user_id', blank=False, 
+                                on_delete=models.CASCADE)
+    products = models.ManyToManyField(Product,
+                                      related_name='products',
+                                      blank=False)
 
+    def total_price(self):
+        total_price = 0
+        for product in self.products.all():
+            total_price += product.price
 
-# class Customer(models.Model):
-#     first_name =
-#     last_name =
-#     email =
+        return total_price
+

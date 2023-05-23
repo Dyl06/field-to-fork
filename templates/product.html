@@ -1,26 +1,16 @@
-{% for product in beef_products %}
-{{ product.price }}
-{{ product.items }}
-{{ product.weight }}
-{{ product.CATEGORIES}}
-<br>
-<!-- {{ product.id }} -->
-<!-- {{ product.CATEGORIES }} -->
+<h1>Showing {{category}}</h1>
+
+{% for product in products %}
+    {{ product.price }}
+    {{ product.items }}
+    {{ product.product_description }}
+    {{ product.weight }}
+    <form method="post" target="">
+        {% csrf_token %}
+        <input type="hidden" name="product_id" value="{{ product.id }}"/>
+        <input type="submit" value="Order Now"/>
+    </form>        
+    <br><br>
+    <!-- {{ product.id }} -->
+    <!-- {{ product.CATEGORIES }} -->
 {% endfor %}
-<br>
-{% for product in lamb_products %}
-{{ product.price }}
-{{ product.items }}
-{{ product.weight }}
-<!-- {{ product.id }} -->
-<br>
-{% endfor %}
-<br>
-{% for product in chicken_products %}
-{{ product.price }}
-{{ product.items }}
-{{ product.weight }}
-<!-- {{ product.id }} -->
-<br>
-{% endfor %}
-<br>

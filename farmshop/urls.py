@@ -2,9 +2,8 @@ from . import views
 from django.urls import path
 
 urlpatterns = [
-    path('', views.CategoryList.as_view(), name='home'),
+    path('', views.HomePage.as_view(), name='home'),
+    path('products/<str:category>', views.CategoryList.as_view(),
+         name='product_list'),
     path('my_orders/', views.OrderList.as_view(), name='orders')
-    # path('', views.BeefItems.as_view(), name='beef')
-    # path('', views.LambItems.as_view(), name='lamb')
-    # path('', views.ChickenItems.as_view(), name='chicken')
  ]

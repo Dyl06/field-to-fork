@@ -1,8 +1,10 @@
+{% load crispy_forms_tags %}
 <h2>Orders</h2>
 
     
 {% for order in order_list %}
 <h2>Order ID {{ order.id }}</h2>
+<b>Total Price {{ order.total_price }}</b>
 <table border=1>
     <tr>
         <td>Order ID</td>
@@ -21,7 +23,7 @@
             <td>Product Name</td>
             <td>Price</td>
         </tr>
-        {% for product in order.products %}
+        {% for product in order.products_list %}
             <tr>
                 <td>{{ product.id }}</td>
                 <td>{{ product.items }}</td>
@@ -30,3 +32,7 @@
         {% endfor %}
     </table>
 {% endfor %}
+
+
+
+{% csrf_token %}

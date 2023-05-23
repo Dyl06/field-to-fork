@@ -106,3 +106,28 @@ Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` f
 ---
 
 Happy coding!
+
+
+
+
+
+# References
+
+https://www.hacksoft.io/blog/introducing-django-enum-choices-2
+
+I used this code to create my three product categories for sale on my sight. Giving each of my individual products a category that they belong to. 
+
+https://docs.djangoproject.com/en/4.2/topics/db/examples/many_to_many/
+
+Used this documentation to figure out how to query the information from the database in a manaytomany field and to display the information contained within the database to the user in the my_orders template. Allowing users to view the orders they have made on the app.
+
+https://www.youtube.com/watch?v=rR8_79NlbVI
+(Between 1:50-2:30 in the video)
+
+I used this video to get the current logged in user_id for displaying the order to that user only. So that they can't see any other users orders. 
+
+https://www.w3schools.com/django/django_queryset_filter.php
+
+Alongside this documentation for the builtin filter() method to select the loggedin user only.
+
+
