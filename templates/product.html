@@ -1,10 +1,11 @@
 <h1>Showing {{category}}</h1>
 
 {% for product in products %}
-    {{ product.price }}
+    {{ product.items_featured_image }}
     {{ product.items }}
     {{ product.product_description }}
     {{ product.weight }}
+    £{{ product.price }}
     <form method="post" target="">
         {% csrf_token %}
         <input type="hidden" name="product_id" value="{{ product.id }}"/>
