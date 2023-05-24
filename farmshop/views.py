@@ -93,16 +93,16 @@ class OrderList(View):
 
         if action == "delete":
 
-        # Get order ID from POST from form
-        order_id = request.POST['order_id']
+            # Get order ID from POST from form
+            order_id = request.POST['order_id']
 
-        # Load the Order
-        order_obj = Order.objects.get(id=order_id)
+            # Load the Order
+            order_obj = Order.objects.get(id=order_id)
 
-        # Delete the Order
-        order_obj.delete()
+            # Delete the Order
+            order_obj.delete()
 
-        user_orders = self.get_orders(request)
+            user_orders = self.get_orders(request)
 
         return render(
             request,
