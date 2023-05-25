@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['f2f-farmshop.herokuapp.com', 'localhost', '8000-dyl06-fieldtofork-caarqaix63h.ws-eu97.gitpod.io']
+ALLOWED_HOSTS = ['f2f-farmshop.herokuapp.com', 'localhost']
 
 
 # Application definition

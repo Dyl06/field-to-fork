@@ -1,7 +1,7 @@
 <h1>Showing {{category}}</h1>
 
 {% for product in products %}
-    {{ product.items_featured_image.url }}
+   <img src="{{ product.items_featured_image.url }}" alt="image of a {{ product.items }}"> 
     {{ product.items }}
     {{ product.product_description }}
     {{ product.weight }}
@@ -12,6 +12,5 @@
         <input type="submit" value="Order Now"/>
     </form>        
     <br><br>
-    <!-- {{ product.id }} -->
-    <!-- {{ product.CATEGORIES }} -->
+   
 {% endfor %}
