@@ -1,7 +1,7 @@
 <h1>Showing {{category}}</h1>
 
 {% for product in products %}
-    {{ product.items_featured_image }}
+    {{ product.items_featured_image.url }}
     {{ product.items }}
     {{ product.product_description }}
     {{ product.weight }}
