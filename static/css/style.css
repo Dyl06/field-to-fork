@@ -1,0 +1,42 @@
+/* header */
+.background img {
+    width: 100%;
+    max-height: 60vh;
+    position: relative;
+}
+
+.background .overlay {
+    position: absolute;
+    top: 80px;
+    font-weight: bold;
+    text-align: left;
+    font-size: 30px;
+    background: #FFFFFF80;
+    border: 2px solid rgb(73, 74, 74);
+    
+}
+
+/* body */
+
+.body {
+    width: 60vw;
+}
+
+.bg-product-container {
+    display: flex;
+    width: 100vw;
+}
+  
+.product-container {
+    flex: 1;
+}
+
+.image {
+    display: inline-block;
+    width: 30vw;
+    max-height: 300px;
+    box-sizing: border-box;
+    border: 3px solid black;
+}
+
+/* footer */

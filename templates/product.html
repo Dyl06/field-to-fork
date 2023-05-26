@@ -1,7 +1,7 @@
 <h1>Showing {{category}}</h1>
 
 {% for product in products %}
-   <img src="{{ product.items_featured_image.url }}" alt="image of a {{ product.items }}"> 
+   <img src="{{ product.items_featured_image.url }}" alt=`Image of a {{ product.items }}`> 
     {{ product.items }}
     {{ product.product_description }}
     {{ product.weight }}
