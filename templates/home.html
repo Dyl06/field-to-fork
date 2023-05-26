@@ -13,7 +13,7 @@
     <div>
         <div class="bg-product-container">
             <div class="product-container">
-                <h2 >F2F</h2>
+                <h1>Field to Fork</h1>
             </div>
             <div class="product-container">
                 <a style="width: 30%; float: left; border: 1px solid black;"href='/products/beef'>Beef</a> 
@@ -21,17 +21,17 @@
                 <a style="width: 30%; float: left; border: 1px solid black;"href='/products/chicken'>Chicken</a>
             </div>
             <div class="product-container">
+                {% if user.is_authenticated %}
                 <a href="my_orders/">My Orders</a>
                 <a href="">Logout</a>
+                {% else %}
                 <a href="">Login</a>
                 <a href="">Register</a>
+                {% endif %}
             </div>
         </div>
         <div class="background">
-            <img class="head-image" src="/static/background1.jpeg" alt="">
-            <div class="overlay">
-                <h1>Field to Fork</h1>
-            </div>
+            <img class="head-image" src="/static/background1.jpeg" alt="Grassy hillside with woodland and snow-capped mountains in the background.">
         </div>
     </div>
     <hr>
@@ -57,7 +57,7 @@
                     <img class="image" src="/static/beef.jpeg" alt="">
                 </div>
                 <div>
-                    <p>
+                    <p class="body">
                         Indulge in the pure delight of our grass-reared
                         organic beef. Raised on our pristine farm, our cattle
                         roam freely, grazing on lush pastures, resulting in
@@ -74,7 +74,7 @@
                     <img class="image" src="/static/lamb.jpeg" alt="">
                 </div>
                 <div>
-                    <p>
+                    <p class="body">
                         Experience the exquisite taste of our grass-reared organic
                         lamb. Our flock peacefully grazes on sun-kissed meadows,
                         resulting in tender and succulent meat that embodies the
@@ -92,7 +92,7 @@
                     <img class="image" src="/static/chicken.jpeg" alt="Image of lambs in a field">
                 </div>
                 <div>
-                    <p>
+                    <p class="body">
                         Discover the exceptional flavor of our free-range organic
                         chicken. Our feathered friends enjoy a life of freedom,
                         foraging on open pastures and feasting on natural,
@@ -101,8 +101,8 @@
                         and a healthier food choice.
                     </p>
                 </div>
-                <div>
-                    <a class="button" href='/products/chicken'>Chicken</a>
+                <div class="button" >
+                    <a href='/products/chicken'>Chicken</a>
                 </div>
             </div>
         </div>
