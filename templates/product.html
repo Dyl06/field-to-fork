@@ -1,4 +1,45 @@
-<h1>Showing {{category}}</h1>
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div class="product-container">
+    <h1>{{category}}</h1>
+    {% for product in products %}
+    <div class="image center">
+        <img id="image" src="{{ product.items_featured_image.url }}" alt=`Image of a {{ product.items }}`>
+    </div>
+    <h6>{{ product.items }}</h6>
+    <div class="center text">
+        <p>
+            {{ product.product_description }}
+            {{ product.weight }}
+            £{{ product.price }}
+        </p>
+    </div>
+    <div class="center">
+    <button>
+        <form method="post" target="">
+            {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{ product.id }}"/>
+            <input type="submit" value="Order Now"/>
+        </form> 
+    </button>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+<!-- 
+<h1>{{category}}</h1>
 
 {% for product in products %}
    <img src="{{ product.items_featured_image.url }}" alt=`Image of a {{ product.items }}`> 
@@ -13,4 +54,4 @@
     </form>        
     <br><br>
    
-{% endfor %}
+{% endfor %} -->

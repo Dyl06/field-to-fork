@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Field to Fork</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div>
+        <div class="bg-head-container">
+            <div class="heading">
+                <a href="/index"><h1>Field to Fork</h1></a>
+            </div>
+            <div class="menu-container">
+                <div class="menu">
+                        <a href='/products/beef'>Beef</a>
+                </div>
+                <div class="menu">               
+                        <a href='/products/lamb'>Lamb</a>
+                    </div>
+                <div class="menu">
+                        <a href='/products/chicken'>Chicken</a>
+                </div>
+            </div>
+            <div class="menu-container">
+                {% if user.is_authenticated %}
+                <a href="my_orders/">Orders</a>
+                <a href="">Logout</a>
+                {% else %}
+                <a href="">Login</a>
+                <a href="">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% block content %}
+    <!-- Content Goes here -->
+    {% endblock content %}
+    <footer id="social-media">
+        <div id="socials">
+            <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://twitter.com/" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+    </footer>
+     <!-- font awesome script-->
+     <script src="https://kit.fontawesome.com/242a22362b.js" crossorigin="anonymous"></script>
+</body>
+</html>

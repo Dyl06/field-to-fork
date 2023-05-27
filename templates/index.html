@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="background">
+    <img class="head-image" src="/static/background1.jpeg" alt="Grassy hillside with woodland and snow-capped mountains in the background.">
+</div>
+<div>
+    <div class="body">
+        <h1>About our Farm</h1>
+        <p>
+            Welcome to our organic farm, where we cultivate a sustainable haven
+            for raising grass-fed, naturally reared meat. Our farm is dedicated to 
+            providing local consumers with the
+            highest quality, ethically produced meats. Our animals graze freely on 
+            lush pastures, feasting on nutrient-rich grasses that enhance the flavor and
+            tenderness of their meat. We embrace organic farming practices, ensuring 
+            the well-being of our livestock and the preservation of the environment. With
+            a deep commitment to transparency and traceability, we offer discerning
+            consumers a delightful and guilt-free option, promoting a healthier 
+            lifestyle and supporting the local community. Taste the difference at our farm 
+            and experience nature's bounty on your plate.
+        </p>
+    </div>
+    <div class="product-head">
+        <h1>Products</h1>
+    </div>
+    <div class="bg-product-container">
+        <div class="product-container">
+            <div class="image center">
+                <img id="image" src="/static/beef.jpeg" alt="">
+            </div>
+            <div class="center text">
+                <p>
+                    Indulge in the pure delight of our grass-reared
+                    organic beef. Raised on our pristine farm, our cattle
+                    roam freely, grazing on lush pastures, resulting in
+                    flavorful, tender meat that is not only delicious but also
+                    a conscious choice for your well-being and the environment.
+                </p>
+            </div>
+            <div class="center">
+                <button>
+                    <a href='/products/beef'>Beef</a>
+                </button>
+            </div>
+        </div>
+        <div class="product-container">
+            <div class="image center">
+                <img id="image" src="/static/lamb.jpeg" alt="">
+            </div>
+            <div class="center text">
+                <p>
+                    Experience the exquisite taste of our grass-reared organic
+                    lamb. Our flock peacefully grazes on sun-kissed meadows,
+                    resulting in tender and succulent meat that embodies the
+                    pure essence of nature. Savor the flavors while knowing
+                    you're supporting sustainable agriculture and animal
+                    welfare.
+                </p>
+            </div>
+            <div class="center">
+            <button>
+                <a href='/products/lamb'>Lamb</a>
+            </button>
+            </div>
+        </div>
+        <div class="product-container">
+            <div class="image center">
+                <img id="image" src="/static/chicken.jpeg" alt="Image of lambs in a field">
+            </div>
+            <div class="center text">
+                <p>
+                    Discover the exceptional flavor of our free-range organic
+                    chicken. Our feathered friends enjoy a life of freedom,
+                    foraging on open pastures and feasting on natural,
+                    pesticide-free grains. Taste the difference in every
+                    succulent bite while supporting ethical farming practices
+                    and a healthier food choice.
+                </p>
+            </div>
+            <div class="center">
+            <button>
+                <a href='/products/chicken'>Chicken</a>
+            </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
