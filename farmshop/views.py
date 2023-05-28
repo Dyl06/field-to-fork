@@ -1,5 +1,8 @@
 from django.shortcuts import render, get_list_or_404, redirect
 from .models import Product, Order
+from .forms import NewUserForm
+from django.contrib.auth import login
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.views import generic, View
 from datetime import datetime
@@ -110,5 +113,57 @@ class OrderList(View):
             {
                 "order_list": user_orders,
                 "message": f"Order Number {order_id}: Deleted Successfully"
+            },
+        )
+
+
+# class RegisterRequest(View):
+#     def register_request(request):
+
+#         if request.method == "POST":
+#             form = NewUserForm(request.POST)
+#             if form.is_valid():
+#                 user = form.save()
+#                 login(request, user)
+#                 messages.success(request, "Registration succesful.")
+#                 return redirect(HomePage(View))
+#             messages.error(request,
+#                            "Unsuccessful registration. Invalid information.")
+#         form = NewUserForm()
+
+#         return render(
+#             request,
+#             'register.html',
+#             {
+#                 "register_form": form
+#             },
+#         )
+
+
+class RegisterRequest(View):
+
+    def get(self, request, *args, **kwargs):
+        return render(
+           request,
+           'register.html',
+        )
+
+    def post(self, request, *args, **kwargs):
+        if request.method == "POST":
+            form = NewUserForm(request.POST)
+            if form.is_valid():
+                user = form.save()
+                login(request, user)
+                messages.success(request, "Registration succesful.")
+                return redirect('/product/beef/')
+            messages.error(request,
+                           "Unsuccesful registration. Invalid information.")
+        form = NewUserForm()
+
+        return render(
+            request,
+            'register.html',
+            {
+                "register_form": form
             },
         )

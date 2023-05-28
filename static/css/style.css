@@ -128,12 +128,7 @@ body {
 }
 
 .center {
-    align-self: center;
-    
-}
-
-.left {
-    align-items: left;
+    align-self: center;   
 }
 
 .text {
