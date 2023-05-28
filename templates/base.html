@@ -29,10 +29,10 @@
             <div class="menu-container">
                 {% if user.is_authenticated %}
                 <a href="/my_orders">Orders</a>
-                <a href="">Logout</a>
+                <a href="/logout">Logout</a>
                 {% else %}
-                <a href="">Login</a>
-                <a href="">Register</a>
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
                 {% endif %}
             </div>
         </div>

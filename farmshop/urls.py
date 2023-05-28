@@ -6,5 +6,6 @@ urlpatterns = [
     path('products/<str:category>', views.CategoryList.as_view(),
          name='product_list'),
     path('my_orders/', views.OrderList.as_view(), name='orders'),
-    path('register/', views.RegisterRequest.as_view(), name='register')
+    path('register/', views.RegisterRequest.as_view(), name='register'),
+    path('login/', views.Login.as_view(), name='login')
  ]

@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_list_or_404, redirect
 from .models import Product, Order
 from .forms import NewUserForm
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.contrib import messages
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.views import generic, View
 from datetime import datetime
@@ -117,29 +118,6 @@ class OrderList(View):
         )
 
 
-# class RegisterRequest(View):
-#     def register_request(request):
-
-#         if request.method == "POST":
-#             form = NewUserForm(request.POST)
-#             if form.is_valid():
-#                 user = form.save()
-#                 login(request, user)
-#                 messages.success(request, "Registration succesful.")
-#                 return redirect(HomePage(View))
-#             messages.error(request,
-#                            "Unsuccessful registration. Invalid information.")
-#         form = NewUserForm()
-
-#         return render(
-#             request,
-#             'register.html',
-#             {
-#                 "register_form": form
-#             },
-#         )
-
-
 class RegisterRequest(View):
 
     def get(self, request, *args, **kwargs):
@@ -165,5 +143,39 @@ class RegisterRequest(View):
             'register.html',
             {
                 "register_form": form
+            },
+        )
+
+
+class Login(View):
+
+    def get(self, request, *args, **kwargs):
+        return render(
+           request,
+           'login.html',
+        )
+    
+    def post(self, request, *args, **kwargs):
+        if request.method == "POST":
+            form = AuthenticationForm(request, data=request.POST)
+            if form.is_valid():
+                username = form.cleaned_data.get('username')
+                password = form.cleaned_data.get('password')
+                user = authenticate(username=username, password=password)
+                if user is not None:
+                    login(request, user)
+                    messages.info(request, f"You are now logged in as {username}.")
+                    return redirect('/home/')
+                else:
+                    messages.error(request, "Invalid username or password.")
+            else:
+                messages.error(request, "Invalid username or password.")
+        form = AuthenticationForm()
+
+        return render(
+            request,
+            'login.html',
+            {
+                "login_form": form
             },
         )
