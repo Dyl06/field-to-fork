@@ -59,13 +59,13 @@ body {
 .menu-container a {
     text-decoration: none;
     color: #071326;
-    font-size: 110%;
+    font-size: 115%;
 }
 
 .menu-container a:hover {
     text-decoration: none;
     color:rgb(136, 148, 146);
-    font-size: 110%;
+    font-size: 120%;
 }
 
 /* body */
@@ -74,8 +74,12 @@ body {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    max-width: 60vw;
+    max-width: 55vw;
     margin-bottom: 20px;
+}
+
+.body p {
+    font-size: 115%;
 }
 
 .product-head {
@@ -128,6 +132,10 @@ body {
     
 }
 
+.left {
+    align-items: left;
+}
+
 .text {
    width: 80%;
    height: auto; 
@@ -151,7 +159,7 @@ button {
     border: #071326 2px solid;
     border-radius: 6px;
     align-items: baseline;
-    background: rgb(136, 148, 146);
+    background: #071326;
  }
 
  button a {
@@ -159,17 +167,17 @@ button {
     font-family: 'Marcellus', serif;
     font-weight: 700;
     font-size: 150%;
-    color: #071326;
+    color:rgb(136, 148, 146);
     text-transform: uppercase;
     letter-spacing: 2px
 }
 
 button a:hover {
-    color:rgb(136, 148, 146);
+    color: #071326;
 }
 
 button:hover {
-    background: #071326;
+    background: rgb(136, 148, 146);
 }
 
 /* footer */

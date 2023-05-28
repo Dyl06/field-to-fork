@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+
 {% load crispy_forms_tags %}
 <h2>Orders</h2>
 
@@ -41,6 +45,4 @@
     </form>       
 {% endfor %}
 
-
-
-{% csrf_token %}
+{% endblock %}
