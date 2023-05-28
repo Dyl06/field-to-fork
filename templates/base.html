@@ -13,7 +13,7 @@
     <div>
         <div class="bg-head-container">
             <div class="heading">
-                <a href="/home"><h1>Field to Fork</h1></a>
+                <a href="/"><h1>Field to Fork</h1></a>
             </div>
             <div class="menu-container">
                 <div class="menu">
@@ -37,6 +37,15 @@
             </div>
         </div>
     </div>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     {% block content %}
     <!-- Content Goes here -->
     {% endblock content %}
@@ -47,6 +56,12 @@
             <a href="https://twitter.com/" target="_blank"><i class="fa-brands fa-twitter"></i></a>
         </div>
     </footer>
+
+    <div id="sale-popover">
+        <h3>Do you need some help?</h3>
+        <p>Give us a call on 0118 123 456 if you need some help with your order!</p>
+    </div>
+
      <!-- font awesome script-->
      <script src="https://kit.fontawesome.com/242a22362b.js" crossorigin="anonymous"></script>
 </body>

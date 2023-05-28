@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_list_or_404, redirect
 from .models import Product, Order
 from .forms import NewUserForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
@@ -11,6 +11,7 @@ from datetime import datetime
 
 class HomePage(View):
     def get(self, request, *args, **kwargs):
+
         return render(
             request,
             'index.html',
@@ -132,8 +133,8 @@ class RegisterRequest(View):
             if form.is_valid():
                 user = form.save()
                 login(request, user)
-                messages.success(request, "Registration succesful.")
-                return redirect('/product/beef/')
+                messages.info(request, "Successfully Registered")
+                return redirect('/')
             messages.error(request,
                            "Unsuccesful registration. Invalid information.")
         form = NewUserForm()
@@ -154,7 +155,7 @@ class Login(View):
            request,
            'login.html',
         )
-    
+
     def post(self, request, *args, **kwargs):
         if request.method == "POST":
             form = AuthenticationForm(request, data=request.POST)
@@ -164,8 +165,7 @@ class Login(View):
                 user = authenticate(username=username, password=password)
                 if user is not None:
                     login(request, user)
-                    messages.info(request, f"You are now logged in as {username}.")
-                    return redirect('/home/')
+                    return redirect('/')
                 else:
                     messages.error(request, "Invalid username or password.")
             else:
@@ -179,3 +179,11 @@ class Login(View):
                 "login_form": form
             },
         )
+
+
+class Logout(View):
+
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        messages.info(request, "You have successfully logged out.")
+        return redirect('/')

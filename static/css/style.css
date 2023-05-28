@@ -195,3 +195,15 @@ button:hover {
 #socials i:hover {
     color:rgb(136, 148, 146);
 }
+
+/* sale popover */
+#sale-popover{
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    width: 20%;
+    height: 20%;
+    background-color: grey;
+    padding: 10px;
+    display: none;
+}
