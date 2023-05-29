@@ -2,6 +2,8 @@ import uuid
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+from django.core.validators import MaxValueValidator
+from django.core.validators import MinValueValidator
 
 
 class Product(models.Model):
@@ -24,7 +26,11 @@ class Product(models.Model):
     items_featured_image = CloudinaryField('image', default='placeholder')
     items_description = models.TextField()
     weight = models.CharField(max_length=50)
-    price = models.IntegerField()
+    price = models.DecimalField(
+        decimal_places=2,
+        max_digits=8,
+        validators=[MinValueValidator(0)]
+    )
     likes = models.ManyToManyField(User, related_name='item_likes', blank=True)
 
     def __str__(self):
@@ -32,6 +38,16 @@ class Product(models.Model):
 
     def accumulated_likes(self):
         return self.likes.count()
+
+
+class UserItem(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.product.items
 
 
 class Order(models.Model):
@@ -48,4 +64,3 @@ class Order(models.Model):
             total_price += product.price
 
         return total_price
-

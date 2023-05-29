@@ -19,10 +19,8 @@ class HomePage(View):
         )
 
 
-
 class CategoryList(View):
 
-    @login_required
     def get(self, request, category, *args, **kwargs):
 
         products = Product.objects.filter(category=category)
@@ -37,7 +35,23 @@ class CategoryList(View):
             },
         )
 
-    @login_required()
+
+class PlaceOrder(View):
+
+    def get(self, request, category, *args, **kwargs):
+
+        products = Product.objects.filter(category=category)
+        product_list = get_list_or_404(products)
+
+        return render(
+            request,
+            'product.html',
+            {
+                "products": product_list,
+                "category": category,
+            },
+        )
+
     def post(self, request, *args, **kwargs):
 
         # Set to right now
@@ -49,7 +63,7 @@ class CategoryList(View):
         # Create the Order
         new_order = Order(created_on=created_on,
                           user_id=user_obj)
-        
+
         new_order.save()
 
         # Get product ID from POST from form
@@ -70,6 +84,12 @@ class CategoryList(View):
                 "new_order": new_order
             },
         )
+
+    # def post(self, request, *args, **kwargs):
+    #     if not request.user.is_authenticated:
+    #         login_required("/login")
+    #     else:
+    #         new_order = self.new_order(request, User)
 
 
 class OrderList(View):
@@ -139,7 +159,10 @@ class RegisterRequest(View):
                 user = form.save()
                 login(request, user)
                 messages.info(request, "Successfully Registered")
-                return redirect('/')
+                if 'next' in request.GET:
+                    return redirect(request.GET['next'])
+                else:
+                    return redirect('/')
             messages.error(request,
                            "Unsuccesful registration. Invalid information.")
         form = NewUserForm()
@@ -170,7 +193,10 @@ class Login(View):
                 user = authenticate(username=username, password=password)
                 if user is not None:
                     login(request, user)
-                    return redirect('/')
+                    if 'next' in request.GET:
+                        return redirect(request.GET['next'])
+                    else:
+                        return redirect('/')
                 else:
                     messages.error(request, "Invalid username or password.")
             else:
@@ -192,3 +218,25 @@ class Logout(View):
         logout(request)
         messages.info(request, "You have successfully logged out.")
         return redirect('/')
+
+
+# class Basket(View):
+
+#     def add_to_cart(request, product_id, quantity):
+#         product = Product.objects.get(id=product_id)
+#         cart = Cart(request)
+#         cart.add(product, product.unit_price, quantity)
+
+#     def remove_from_cart(request, product_id):
+#         product = Product.objects.get(id=product_id)
+#         cart = Cart(request)
+#         cart.remove(product)
+
+#     def get_cart(request):
+#         return render(
+#             request,
+#             'cart.html', 
+#             {
+#                 'cart': Cart(request)
+#             },
+#         )

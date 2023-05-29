@@ -18,7 +18,7 @@
         </div>
         <div class="center">
         <button>
-            <form method="post" target="">
+            <form method="post" action="/order/{{ product.category }}">
                 {% csrf_token %}
                 <input type="hidden" name="product_id" value="{{ product.id }}"/>
                 <input type="submit" value="Order Now"/>
@@ -31,27 +31,3 @@
 </div>
 
 {% endblock %}
-
-
-
-
-
-
-
-<!-- 
-<h1>{{category}}</h1>
-
-{% for product in products %}
-   <img src="{{ product.items_featured_image.url }}" alt=`Image of a {{ product.items }}`> 
-    {{ product.items }}
-    {{ product.product_description }}
-    {{ product.weight }}
-    £{{ product.price }}
-    <form method="post" target="">
-        {% csrf_token %}
-        <input type="hidden" name="product_id" value="{{ product.id }}"/>
-        <input type="submit" value="Order Now"/>
-    </form>        
-    <br><br>
-   
-{% endfor %} -->
