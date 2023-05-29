@@ -3,6 +3,7 @@ from .models import Product, Order
 from .forms import NewUserForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.views import generic, View
@@ -18,8 +19,10 @@ class HomePage(View):
         )
 
 
+
 class CategoryList(View):
 
+    @login_required
     def get(self, request, category, *args, **kwargs):
 
         products = Product.objects.filter(category=category)
@@ -34,6 +37,7 @@ class CategoryList(View):
             },
         )
 
+    @login_required()
     def post(self, request, *args, **kwargs):
 
         # Set to right now
@@ -45,6 +49,7 @@ class CategoryList(View):
         # Create the Order
         new_order = Order(created_on=created_on,
                           user_id=user_obj)
+        
         new_order.save()
 
         # Get product ID from POST from form

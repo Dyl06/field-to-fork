@@ -31,6 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['f2f-farmshop.herokuapp.com', 'localhost']
 
+LOGIN_URL= '/login'
 
 # Application definition
 

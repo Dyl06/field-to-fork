@@ -1,9 +1,11 @@
 from . import views
 from django.urls import path
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     path('', views.HomePage.as_view(), name='home'),
-    path('products/<str:category>', views.CategoryList.as_view(),
+    path('products/<str:category>',
+         login_required(views.CategoryList.as_view()),
          name='product_list'),
     path('my_orders/', views.OrderList.as_view(), name='orders'),
     path('register/', views.RegisterRequest.as_view(), name='register'),
