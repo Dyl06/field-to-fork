@@ -19,8 +19,8 @@ class HomePageTest(SimpleTestCase):
         response = c.get("/")
         self.assertContains(response, 'Login')
 
-# class MyOrdersTest(SimpleTestCase):
-    # def test_my_orders_needs_login(self):
-    #     c = Client()
-    #     response = c.get("/my_orders/")
-    #     self.assertEqual(response.status_code, 301)
+class MyOrdersTest(SimpleTestCase):
+    def test_my_orders_needs_login(self):
+        c = Client()
+        response = c.get("/my_orders/")
+        self.assertEqual(response.status_code, 302)

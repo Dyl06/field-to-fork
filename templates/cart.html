@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="grid grid-cols-3 gap-4 m-12">
+    <div class="col-span-2">
+        <h2 class="font-medium leading-tight text-4xl mt-0 mb-4 text-blue-600">Products</h2>
+
+        <div class="flex flex-wrap">
+            {% for product in products %}
+            <a href="#" class="w-[50%] p-6 max-w-sm bg-white rounded-lg border border-gray-200">
+                <h5>
+                    {{ product.item }}
+                </h5>
+                <div class="flex justify-between">
+                    <p class="font-normal text-gray-700 dark:text-gray-400">
+                        £{{ product.price }}
+                    </p>
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold">
+                        Add to Cart
+                    </button>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="font-medium leading-tight text-4xl mt-0 mb-4 text-blue-600">Cart</div>
+</div>
+{% endfor %}
+{% endblock %}

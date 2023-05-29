@@ -220,23 +220,33 @@ class Logout(View):
         return redirect('/')
 
 
-# class Basket(View):
+class Basket(View):
 
-#     def add_to_cart(request, product_id, quantity):
-#         product = Product.objects.get(id=product_id)
-#         cart = Cart(request)
-#         cart.add(product, product.unit_price, quantity)
+    # def get(self, request, *args, **kwargs):
 
-#     def remove_from_cart(request, product_id):
-#         product = Product.objects.get(id=product_id)
-#         cart = Cart(request)
-#         cart.remove(product)
+    #     return render(
+    #         request,
+    #         'cart.html',
+    #         {
+    #             'cart': Basket()
+    #         }
+    #     )
 
-#     def get_cart(request):
-#         return render(
-#             request,
-#             'cart.html', 
-#             {
-#                 'cart': Cart(request)
-#             },
-#         )
+    def add_to_cart(request, product_id, quantity):
+        product = Product.objects.get(id=product_id)
+        cart = Basket(request)
+        cart.add(product, product.unit_price, quantity)
+
+    def remove_from_cart(request, product_id):
+        product = Product.objects.get(id=product_id)
+        cart = Basket(request)
+        cart.remove(product)
+
+    def get_cart(request):
+        return render(
+            request,
+            'cart.html', 
+            {
+                'cart': Basket(request)
+            },
+        )
