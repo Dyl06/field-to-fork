@@ -46,6 +46,9 @@ class UserItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
     added = models.DateTimeField(auto_now_add=True)
 
+    def line_total(self):
+        return self.products.price * self.quantity
+
     def __str__(self):
         return self.products.items
 
@@ -53,6 +56,9 @@ class UserItem(models.Model):
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
+
+    def line_total(self):
+        return self.product.price * self.quantity
 
     def __str__(self):
         return self.product.items
@@ -64,8 +70,6 @@ class Order(models.Model):
                                 on_delete=models.CASCADE)
     products = models.ManyToManyField(OrderItem,
                                       blank=True)
-    # products = models.ForeignKey(OrderItem, on_delete=models.CASCADE,
-    #                              blank=True)
 
     def total_price(self):
         total_price = 0

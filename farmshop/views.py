@@ -102,6 +102,9 @@ class RegisterRequest(View):
         return render(
            request,
            'register.html',
+           {
+                "register_form": NewUserForm()
+           },
         )
 
     def post(self, request, *args, **kwargs):
@@ -134,6 +137,9 @@ class Login(View):
         return render(
            request,
            'login.html',
+           {
+                "login_form": AuthenticationForm()
+            },
         )
 
     def post(self, request, *args, **kwargs):

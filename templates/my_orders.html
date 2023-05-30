@@ -7,6 +7,8 @@
 
 <pre>{{ message }}</pre>
     
+<p>Please call us on 0118 123 4567 to arrange collection of your order at a time that suits you</p>
+
 {% for order in order_list %}
 <h2>Order ID {{ order.id }}</h2>
 
@@ -27,12 +29,16 @@
             <td>Product ID</td>
             <td>Product Name</td>
             <td>Price</td>
+            <td>Quantity</td>
+            <td>Line Total</td>
         </tr>
         {% for order_item in order.products_list %}
             <tr>
                 <td>{{ order_item.product.id }}</td>
                 <td>{{ order_item.product.items }}</td>
-                <td>{{ order_item.product.price }}</td>
+                <td>£{{ order_item.product.price }}</td>
+                <td>{{ order_item.quantity }}</td>
+                <td>£{{ order_item.line_total }}</td>
             </tr>
         {% endfor %}
         
