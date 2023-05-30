@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_list_or_404, redirect
-from .models import Product, Order
+from .models import Product, Order, UserItem
 from .forms import NewUserForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
@@ -227,26 +227,39 @@ class Basket(View):
     #     return render(
     #         request,
     #         'cart.html',
-    #         {
-    #             'cart': Basket()
-    #         }
+    #         # {
+    #         #     'cart': Basket
+    #         # }
     #     )
 
-    def add_to_cart(request, product_id, quantity):
-        product = Product.objects.get(id=product_id)
-        cart = Basket(request)
-        cart.add(product, product.unit_price, quantity)
+    def get(self, request, *args, **kwargs):
 
-    def remove_from_cart(request, product_id):
-        product = Product.objects.get(id=product_id)
-        cart = Basket(request)
-        cart.remove(product)
+        products = Product.objects
+        product_list = get_list_or_404(products)
 
-    def get_cart(request):
         return render(
             request,
-            'cart.html', 
+            'cart.html',
             {
-                'cart': Basket(request)
+                "products": product_list,
             },
         )
+
+    # def add_to_cart(request, product_id, quantity):
+    #     product = Product.objects.get(id=product_id)
+    #     cart = Basket(request)
+    #     cart.add(product, product.unit_price, quantity)
+
+    # def remove_from_cart(request, product_id):
+    #     product = Product.objects.get(id=product_id)
+    #     cart = Basket(request)
+    #     cart.remove(product)
+
+    # def get_cart(request):
+    #     return render(
+    #         request,
+    #         'cart.html',
+    #         {
+    #             'cart': Basket(request)
+    #         },
+    #     )

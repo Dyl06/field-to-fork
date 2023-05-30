@@ -41,18 +41,18 @@ class Product(models.Model):
 
 
 class UserItem(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    products = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.product.items
+        return self.products.items
 
 
 class Order(models.Model):
     created_on = models.DateTimeField()
-    user_id = models.ForeignKey(User, related_name='user_id', blank=False, 
+    user_id = models.ForeignKey(User, related_name='user_id', blank=False,
                                 on_delete=models.CASCADE)
     products = models.ManyToManyField(Product,
                                       related_name='products',

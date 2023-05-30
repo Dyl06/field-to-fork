@@ -10,14 +10,18 @@
             {% for product in products %}
             <a href="#" class="w-[50%] p-6 max-w-sm bg-white rounded-lg border border-gray-200">
                 <h5>
-                    {{ product.item }}
+                    {{ product.items }}
                 </h5>
                 <div class="flex justify-between">
                     <p class="font-normal text-gray-700 dark:text-gray-400">
                         £{{ product.price }}
                     </p>
                     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold">
-                        Add to Cart
+                        <form method="post" action="/order/{{ product.category }}">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ product.id }}"/>
+                            <input type="submit" value="Add to Cart"/>
+                        </form> 
                     </button>
                 </div>
             </a>
@@ -28,3 +32,5 @@
 </div>
 {% endfor %}
 {% endblock %}
+
+

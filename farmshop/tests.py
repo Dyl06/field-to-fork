@@ -19,6 +19,7 @@ class HomePageTest(SimpleTestCase):
         response = c.get("/")
         self.assertContains(response, 'Login')
 
+
 class MyOrdersTest(SimpleTestCase):
     def test_my_orders_needs_login(self):
         c = Client()
