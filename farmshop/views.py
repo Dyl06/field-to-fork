@@ -57,7 +57,7 @@ class OrderList(View):
 
     def get_orders(self, request):
         current_user_id = request.user.id
-        queryset = Order.objects.filter(user_id=current_user_id).order_by("-created_on")  # noqa
+        queryset = Order.objects.filter(user_id=current_user_id).order_by("-id")  # noqa
         user_orders = get_list_or_404(queryset)
 
         for order in user_orders:

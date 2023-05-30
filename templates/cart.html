@@ -28,9 +28,12 @@
                         {% csrf_token %}
                         <input type="hidden" name="action" value="update_quantity"/>
                         <input type="hidden" name="product_id" value="{{ item.products.id }}"/>
-                        <input type="text" name="quantity" value="{{ item.quantity }}"/>
-                        <input type="submit" value="Update Quantity"/>
+                        <input type="number" id='product-quantity-{{ item.products.id  }}' name="quantity" value="{{ item.quantity }}"/>
+                        <button type='button' onClick="increaseQuantity('product-quantity-{{ item.products.id }}')">+</button>
+                        <button type='button' onClick="decreaseQuantity('product-quantity-{{ item.products.id }}')">-</button>
+                        <button type="submit">Update Quantity</button>
                     </form> 
+                    
                 </h4>
                 <div class="flex justify-between">
                     <p class="font-normal text-gray-700 dark:text-gray-400">
