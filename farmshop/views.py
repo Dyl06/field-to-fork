@@ -134,15 +134,6 @@ class OrderList(View):
 
             user_orders = self.get_orders(request)
 
-        return render(
-            request,
-            'my_orders.html',
-            {
-                "order_list": user_orders,
-                "message": f"Order Number {order_id}: Deleted Successfully"
-            },
-        )
-
 
 class RegisterRequest(View):
 
@@ -234,14 +225,13 @@ class Basket(View):
 
     def get(self, request, *args, **kwargs):
 
-        products = Product.objects
-        product_list = get_list_or_404(products)
+        basket_items = UserItem.objects
 
         return render(
             request,
             'cart.html',
             {
-                "products": product_list,
+                "items": basket_items.values(),
             },
         )
 

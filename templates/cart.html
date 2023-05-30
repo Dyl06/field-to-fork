@@ -2,12 +2,17 @@
 
 {% block content %}
 
+<h2>Basket</h2>
+
+{% if items|length == 0 %}
+<p>Cart is Empty. Please add some items to cart.</p>
+{% endif %}
+
 <div class="grid grid-cols-3 gap-4 m-12">
     <div class="col-span-2">
-        <h2 class="font-medium leading-tight text-4xl mt-0 mb-4 text-blue-600">Products</h2>
 
         <div class="flex flex-wrap">
-            {% for product in products %}
+            {% for product in items %}
             <a href="#" class="w-[50%] p-6 max-w-sm bg-white rounded-lg border border-gray-200">
                 <h5>
                     {{ product.items }}
