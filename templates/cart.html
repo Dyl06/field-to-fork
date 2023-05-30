@@ -6,7 +6,12 @@
 
 {% if basket_items|length == 0 %}
 <p>Cart is Empty. Please add some items to cart.</p>
-{% endif %}
+<form class="hidden" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="buy_now"/>
+    <input type="submit" value="Buy now"/>
+</form>
+{% else %}
 
 <div class="grid grid-cols-3 gap-4 m-12">
     <div class="col-span-2">
@@ -51,7 +56,7 @@
     <input type="submit" value="Buy now"/>
 </form> 
 
-
+{% endif %}
 {% endblock %}
 
 
