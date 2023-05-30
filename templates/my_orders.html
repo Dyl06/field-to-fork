@@ -28,11 +28,11 @@
             <td>Product Name</td>
             <td>Price</td>
         </tr>
-        {% for product in order.products_list %}
+        {% for order_item in order.products_list %}
             <tr>
-                <td>{{ product.id }}</td>
-                <td>{{ product.items }}</td>
-                <td>{{ product.price }}</td>
+                <td>{{ order_item.product.id }}</td>
+                <td>{{ order_item.product.items }}</td>
+                <td>{{ order_item.product.price }}</td>
             </tr>
         {% endfor %}
     </table>

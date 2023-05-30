@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_list_or_404, redirect
-from .models import Product, Order, UserItem
+from .models import Product, Order, UserItem, OrderItem
 from .forms import NewUserForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
@@ -52,45 +52,6 @@ class PlaceOrder(View):
             },
         )
 
-    def post(self, request, *args, **kwargs):
-
-        # Set to right now
-        created_on = datetime.now()
-
-        # Current user
-        user_obj = request.user
-
-        # Create the Order
-        new_order = Order(created_on=created_on,
-                          user_id=user_obj)
-
-        new_order.save()
-
-        # Get product ID from POST from form
-        product_id = request.POST['product_id']
-
-        # Ordered product
-        product_obj = Product.objects.get(id=product_id)
-
-        # Add to the Order
-        new_order.products.add(product_obj)
-        new_order.save()
-
-        return render(
-            request,
-            'order_created.html',
-            {
-                "product": product_obj,
-                "new_order": new_order
-            },
-        )
-
-    # def post(self, request, *args, **kwargs):
-    #     if not request.user.is_authenticated:
-    #         login_required("/login")
-    #     else:
-    #         new_order = self.new_order(request, User)
-
 
 class OrderList(View):
 
@@ -100,7 +61,7 @@ class OrderList(View):
         user_orders = get_list_or_404(queryset)
 
         for order in user_orders:
-            order.products_list = order.products.all().values()
+            order.products_list = order.products.all()
 
         return user_orders
 
@@ -301,23 +262,39 @@ class Basket(View):
 
             messages.info(request, "Deleted item from basket")
 
+        elif action == "buy_now":
+
+            # create new order
+
+            # Set to right now
+            created_on = datetime.now()
+
+            # Current user
+            user_obj = request.user
+
+            # Create the Order
+            new_order = Order(created_on=created_on,
+                              user_id=user_obj)
+
+            new_order.save()
+
+            # Load the Basket Items
+            item_objects = UserItem.objects.filter(user=user_obj)
+
+            for item in item_objects:
+                new_order_item = OrderItem(product=item.products,
+                                           quantity=item.quantity)
+                new_order_item.save()
+                new_order.products.add(new_order_item)
+
+            new_order.save()
+
+            # Empty current basket
+            item_objects.delete()
+
+
+            # redirect to my orders
+            return redirect("/my_orders/")
+
         return redirect("/basket/")
 
-    # def add_to_cart(request, product_id, quantity):
-    #     product = Product.objects.get(id=product_id)
-    #     cart = Basket(request)
-    #     cart.add(product, product.unit_price, quantity)
-
-    # def remove_from_cart(request, product_id):
-    #     product = Product.objects.get(id=product_id)
-    #     cart = Basket(request)
-    #     cart.remove(product)
-
-    # def get_cart(request):
-    #     return render(
-    #         request,
-    #         'cart.html',
-    #         {
-    #             'cart': Basket(request)
-    #         },
-    #     )
