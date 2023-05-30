@@ -207,7 +207,7 @@ button:hover {
     padding: 10px;
     display: none;
 }
-
+/* Hiddnig buy now button for empty cart */
 .hidden {
     display: none;
 }

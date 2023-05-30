@@ -36,15 +36,7 @@
             </tr>
         {% endfor %}
     </table>
-
-    <form method="post" target="">
-        {% csrf_token %}
-        <input type="hidden" name="action" value="delete"/>
-        <input type="hidden" name="action" value="increase_quantity"/>
-        <input type="hidden" name="action" value="decrease_quantity"/>
-        <input type="hidden" name="order_id" value="{{ order.id }}"/>
-        <input type="submit" value="Delete Order"/>
-    </form>       
+    
 {% endfor %}
 
 {% endblock %}
