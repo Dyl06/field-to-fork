@@ -213,16 +213,6 @@ class Logout(View):
 
 class Basket(View):
 
-    # def get(self, request, *args, **kwargs):
-
-    #     return render(
-    #         request,
-    #         'cart.html',
-    #         # {
-    #         #     'cart': Basket
-    #         # }
-    #     )
-
     def get(self, request, *args, **kwargs):
 
         basket_items = UserItem.objects
@@ -234,6 +224,31 @@ class Basket(View):
                 "items": basket_items.values(),
             },
         )
+
+    def post(self, request, *args, **kwargs):
+
+        # Check the action
+        action = request.POST['action']
+
+        if action == "add_to_basket":
+
+            # Get order ID from POST from form
+            product_id = request.POST['product_id']
+
+            # Load the Product
+            product_obj = Product.objects.get(id=product_id)
+
+            user = request.user
+
+            new_basket_item = UserItem(products=product_obj,
+                                       user=user,
+                                       quantity=1)
+            new_basket_item.save()
+
+            messages.info(request, "Added to basket")
+
+            return redirect("/basket/")
+
 
     # def add_to_cart(request, product_id, quantity):
     #     product = Product.objects.get(id=product_id)

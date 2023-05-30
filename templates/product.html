@@ -18,10 +18,11 @@
         </div>
         <div class="center">
         <button>
-            <form method="post" action="/order/{{ product.category }}">
+            <form method="post" action="/basket/">
                 {% csrf_token %}
+                <input type="hidden" name="action" value="add_to_basket"/>
                 <input type="hidden" name="product_id" value="{{ product.id }}"/>
-                <input type="submit" value="Order Now"/>
+                <input type="submit" value="Add to Basket"/>
             </form> 
         </button>
         </div>
