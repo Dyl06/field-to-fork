@@ -57,7 +57,7 @@ class OrderList(View):
 
     def get_orders(self, request):
         current_user_id = request.user.id
-        queryset = Order.objects.filter(user_id=current_user_id).order_by("-created_on")  #noqa
+        queryset = Order.objects.filter(user_id=current_user_id).order_by("-created_on")  # noqa
         user_orders = get_list_or_404(queryset)
 
         for order in user_orders:
@@ -229,7 +229,7 @@ class Basket(View):
                 new_basket_item.save()
 
             messages.info(request, "Added to basket")
-        
+
         elif action == "update_quantity":
 
             user = request.user
@@ -292,9 +292,7 @@ class Basket(View):
             # Empty current basket
             item_objects.delete()
 
-
             # redirect to my orders
             return redirect("/my_orders/")
 
         return redirect("/basket/")
-

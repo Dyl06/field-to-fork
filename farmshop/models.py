@@ -54,17 +54,18 @@ class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
 
-    # def __str__(self):
-    #     return self.product.items
+    def __str__(self):
+        return self.product.items
 
 
 class Order(models.Model):
     created_on = models.DateTimeField()
     user_id = models.ForeignKey(User, related_name='user_id', blank=False,
                                 on_delete=models.CASCADE)
-
     products = models.ManyToManyField(OrderItem,
                                       blank=True)
+    # products = models.ForeignKey(OrderItem, on_delete=models.CASCADE,
+    #                              blank=True)
 
     def total_price(self):
         total_price = 0
@@ -72,3 +73,9 @@ class Order(models.Model):
             total_price += ordered_item.product.price * ordered_item.quantity
 
         return total_price
+
+    def __str__(self):
+        return f"{self.user_id}"
+
+    def __str__(self):
+        return self.products

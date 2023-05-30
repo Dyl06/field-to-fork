@@ -28,7 +28,8 @@
             </div>
             <div class="menu-container">
                 {% if user.is_authenticated %}
-                <a href="/basket"><i class="fas fa-shopping-cart"></i></a>
+                <a href="/basket"><i class="fas fa-shopping-cart"></i>Basket</a>
+                <a href="/my_orders">My Orders</a>
                 <a href="/logout">Logout</a>
                 {% else %}
                 <a href="/login">Login</a>
