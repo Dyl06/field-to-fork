@@ -215,13 +215,13 @@ class Basket(View):
 
     def get(self, request, *args, **kwargs):
 
-        basket_items = UserItem.objects
+        basket_items = UserItem.objects.filter(user=request.user)
 
         return render(
             request,
             'cart.html',
             {
-                "items": basket_items.values(),
+                "basket_items": basket_items,
             },
         )
 
