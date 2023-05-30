@@ -16,28 +16,42 @@
 
             <a href="#" class="w-[50%] p-6 max-w-sm bg-white rounded-lg border border-gray-200">
                 <h3>
-                    Product = {{ item.products.items }}
+                    {{ item.products.items }}
                 </h3>
                 <h4>
-                    Qty = {{ item.quantity }}
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="update_quantity"/>
+                        <input type="hidden" name="product_id" value="{{ item.products.id }}"/>
+                        <input type="text" name="quantity" value="{{ item.quantity }}"/>
+                        <input type="submit" value="Update Quantity"/>
+                    </form> 
                 </h4>
                 <div class="flex justify-between">
                     <p class="font-normal text-gray-700 dark:text-gray-400">
                        Price = £{{ item.products.price }}
                     </p>
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold">
-                        <form method="post" action="/order/{{ product.category }}">
-                            {% csrf_token %}
-                            <input type="hidden" name="product_id" value="{{ product.id }}"/>
-                            <input type="submit" value="Add to Cart"/>
-                        </form> 
-                    </button>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="delete"/>
+                        <input type="hidden" name="product_id" value="{{ item.products.id }}"/>
+                        <input type="submit" value="Remove Product from Basket"/>
+                    </form> 
                 </div>
             </a>
         </div>
     </div>
 </div>
 {% endfor %}
+
+<br/><br/>
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="buy_now"/>
+    <input type="submit" value="Buy now"/>
+</form> 
+
+
 {% endblock %}
 
 

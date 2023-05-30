@@ -213,6 +213,16 @@ class Logout(View):
 
 class Basket(View):
 
+    def get_orders(self, request):
+        current_user_id = request.user.id
+        queryset = UserItem.objects.filter(user_id=current_user_id)
+        user_orders = get_list_or_404(queryset)
+
+        for order in user_orders:
+            order.products_list = order.products.all().values()
+
+        return user_orders
+
     def get(self, request, *args, **kwargs):
 
         basket_items = UserItem.objects.filter(user=request.user)
@@ -232,23 +242,66 @@ class Basket(View):
 
         if action == "add_to_basket":
 
+            user = request.user
+
             # Get order ID from POST from form
             product_id = request.POST['product_id']
 
             # Load the Product
             product_obj = Product.objects.get(id=product_id)
 
-            user = request.user
+            # Is this product in the basket
+            if UserItem.objects.filter(products=product_obj,
+                                       user=user).exists():
+                # Increase quantity
+                order_obj = UserItem.objects.get(products=product_obj,
+                                                 user=user)
+                order_obj.quantity = order_obj.quantity + 1
+                order_obj.save()
 
-            new_basket_item = UserItem(products=product_obj,
-                                       user=user,
-                                       quantity=1)
-            new_basket_item.save()
+            else:
+                # Add new order
+
+                new_basket_item = UserItem(products=product_obj,
+                                           user=user,
+                                           quantity=1)
+                new_basket_item.save()
 
             messages.info(request, "Added to basket")
+        
+        elif action == "update_quantity":
 
-            return redirect("/basket/")
+            user = request.user
 
+            # Get order ID from POST from form
+            product_id = request.POST['product_id']
+
+            # Load the Product
+            product_obj = Product.objects.get(id=product_id)
+
+            order_obj = UserItem.objects.get(products=product_obj,
+                                             user=user)
+            order_obj.quantity = request.POST['quantity']
+            order_obj.save()
+
+            messages.info(request, "Updated quantity")
+
+        elif action == "delete":
+
+            # Get order ID from POST from form
+            product_id = request.POST['product_id']
+
+            product_obj = Product.objects.get(id=product_id)
+
+            # Load the Basket Items
+            order_obj = UserItem.objects.filter(products=product_obj)
+
+            # Delete the Basket Items
+            order_obj.delete()
+
+            messages.info(request, "Deleted item from basket")
+
+        return redirect("/basket/")
 
     # def add_to_cart(request, product_id, quantity):
     #     product = Product.objects.get(id=product_id)
