@@ -308,7 +308,7 @@ button:hover {
 
 #social-media {
     height: 150px;
-    width: 100%;
+    width: 100vw;
 }
 
 #socials {
@@ -323,19 +323,6 @@ button:hover {
 
 #socials i:hover {
     color:rgb(136, 148, 146);
-}
-
-/* sale popover */
-
-#sale-popover{
-    position: fixed;
-    bottom: 0px;
-    right: 0px;
-    width: 20%;
-    height: 20%;
-    background-color: grey;
-    padding: 10px;
-    display: none;
 }
 
 /* Hiddnig buy now button for empty cart */
@@ -363,6 +350,29 @@ button:hover {
     padding: 10px;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
 
+    .bg-product-container {
+        display: flex;
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        justify-content: center;
+        justify-self: center;
+        align-items: start;
+        margin-bottom: 50px;
+    }
+
+    .product-container {
+        display: flex;
+        width: 100%;
+        height: auto;
+        justify-content: center;
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .body {
+        max-width: 80vw;
+    }
 }
