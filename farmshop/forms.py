@@ -3,6 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 
+# Form for new users to full out,
+# to create an account.
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True)
 

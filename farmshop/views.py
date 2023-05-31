@@ -10,6 +10,7 @@ from django.views import generic, View
 from datetime import datetime
 
 
+# View to render the home page
 class HomePage(View):
     def get(self, request, *args, **kwargs):
 
@@ -19,6 +20,8 @@ class HomePage(View):
         )
 
 
+# View to render each of the product categories for user to
+# navigate through and purchase.
 class CategoryList(View):
 
     def get(self, request, category, *args, **kwargs):
@@ -36,6 +39,9 @@ class CategoryList(View):
         )
 
 
+# View that displays the products but
+# requires login if user tries to add
+# to basket before being logged in or registered.
 class PlaceOrder(View):
 
     def get(self, request, category, *args, **kwargs):
@@ -53,8 +59,11 @@ class PlaceOrder(View):
         )
 
 
+# View that creates an order for users to view there
+# current and previous session orders.
 class OrderList(View):
 
+    # Method to get user orders
     def get_orders(self, request):
         current_user_id = request.user.id
         queryset = Order.objects.filter(user_id=current_user_id).order_by("-id")  # noqa
@@ -65,6 +74,7 @@ class OrderList(View):
 
         return user_orders
 
+    # Render orders to template
     def get(self, request, *args, **kwargs):
 
         user_orders = self.get_orders(request)
@@ -77,6 +87,7 @@ class OrderList(View):
             },
         )
 
+    # Method to delete orders
     def post(self, request, *args, **kwargs):
 
         # Check the action
@@ -96,6 +107,7 @@ class OrderList(View):
             user_orders = self.get_orders(request)
 
 
+# View to allow users to register to the site.
 class RegisterRequest(View):
 
     def get(self, request, *args, **kwargs):
@@ -107,6 +119,8 @@ class RegisterRequest(View):
            },
         )
 
+    # Check user validation before accepting registration else error
+    # message
     def post(self, request, *args, **kwargs):
         if request.method == "POST":
             form = NewUserForm(request.POST)
@@ -131,6 +145,7 @@ class RegisterRequest(View):
         )
 
 
+# View for user login
 class Login(View):
 
     def get(self, request, *args, **kwargs):
@@ -142,6 +157,7 @@ class Login(View):
             },
         )
 
+    # Check login credintials are valid
     def post(self, request, *args, **kwargs):
         if request.method == "POST":
             form = AuthenticationForm(request, data=request.POST)
@@ -170,6 +186,7 @@ class Login(View):
         )
 
 
+# View to logout, return to homepage after logout
 class Logout(View):
 
     def get(self, request, *args, **kwargs):
@@ -178,18 +195,10 @@ class Logout(View):
         return redirect('/')
 
 
+# View to display basket and functionality
 class Basket(View):
 
-    def get_orders(self, request):
-        current_user_id = request.user.id
-        queryset = UserItem.objects.filter(user_id=current_user_id)
-        user_orders = get_list_or_404(queryset)
-
-        for order in user_orders:
-            order.products_list = order.products.all().values()
-
-        return user_orders
-
+    # Get the current add to basket items
     def get(self, request, *args, **kwargs):
 
         basket_items = UserItem.objects.filter(user=request.user)
@@ -202,6 +211,7 @@ class Basket(View):
             },
         )
 
+    # Method handling CRUD functionality in basket for users.
     def post(self, request, *args, **kwargs):
 
         # Check the action
@@ -246,6 +256,7 @@ class Basket(View):
             # Load the Product
             product_obj = Product.objects.get(id=product_id)
 
+            # Confirm order update
             order_obj = UserItem.objects.get(products=product_obj,
                                              user=user)
             order_obj.quantity = request.POST['quantity']

@@ -6,6 +6,7 @@ from django.core.validators import MaxValueValidator
 from django.core.validators import MinValueValidator
 
 
+# Model for all the products for sale.
 class Product(models.Model):
     BEEF = 'beef'
     LAMB = 'lamb'
@@ -40,6 +41,7 @@ class Product(models.Model):
         return self.likes.count()
 
 
+# Model for product items the user has added to their basket ready for purchase
 class UserItem(models.Model):
     products = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -53,6 +55,7 @@ class UserItem(models.Model):
         return self.products.items
 
 
+# Model for products the user has bought in current session or previously.
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
@@ -64,6 +67,7 @@ class OrderItem(models.Model):
         return self.product.items
 
 
+# Model for creating an order
 class Order(models.Model):
     created_on = models.DateTimeField()
     user_id = models.ForeignKey(User, related_name='user_id', blank=False,
