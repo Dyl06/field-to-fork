@@ -18,7 +18,9 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='order',
             name='products',
-            field=models.ForeignKey(blank=True, default=1, on_delete=django.db.models.deletion.CASCADE, to='farmshop.orderitem'),
+            field=models.ForeignKey(blank=True, default=1,
+                                    on_delete=django.db.models.deletion.CASCADE,  # noqa
+                                    to='farmshop.orderitem'),
             preserve_default=False,
         ),
     ]

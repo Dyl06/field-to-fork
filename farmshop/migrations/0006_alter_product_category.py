@@ -13,6 +13,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='product',
             name='category',
-            field=models.CharField(choices=[('beef', 'beef'), ('lamb', 'lamb'), ('chicken', 'chicken')], default='beef', max_length=100),
+            field=models.CharField(choices=[('beef', 'beef'), ('lamb', 'lamb'),
+                                            ('chicken', 'chicken')],
+                                   default='beef', max_length=100),
         ),
     ]

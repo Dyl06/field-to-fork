@@ -17,7 +17,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='order',
             name='products',
-            field=models.ManyToManyField(related_name='products', to='farmshop.Product'),
+            field=models.ManyToManyField(related_name='products',
+                                         to='farmshop.Product'),
         ),
         migrations.DeleteModel(
             name='OrderItem',

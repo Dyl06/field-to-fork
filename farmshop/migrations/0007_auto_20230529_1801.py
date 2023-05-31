@@ -17,16 +17,18 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='product',
             name='price',
-            field=models.DecimalField(decimal_places=2, max_digits=8, validators=[django.core.validators.MinValueValidator(0)]),
+            field=models.DecimalField(decimal_places=2, max_digits=8,
+                                      validators=[django.core.validators.MinValueValidator(0)]),  # noqa
         ),
         migrations.CreateModel(
             name='UserItem',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True,
+                                           serialize=False, verbose_name='ID')),  # noqa
                 ('quantity', models.PositiveIntegerField(default=1)),
                 ('added', models.DateTimeField(auto_now_add=True)),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='farmshop.product')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='farmshop.product')),  # noqa
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),  # noqa
             ],
         ),
     ]

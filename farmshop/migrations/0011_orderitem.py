@@ -14,9 +14,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='OrderItem',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),  # noqa
                 ('quantity', models.PositiveIntegerField(default=1)),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='farmshop.product')),
+                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='farmshop.product')),  # noqa
             ],
         ),
     ]

@@ -32,13 +32,9 @@ class Product(models.Model):
         max_digits=8,
         validators=[MinValueValidator(0)]
     )
-    likes = models.ManyToManyField(User, related_name='item_likes', blank=True)
 
     def __str__(self):
         return self.items
-
-    def accumulated_likes(self):
-        return self.likes.count()
 
 
 # Model for product items the user has added to their basket ready for purchase

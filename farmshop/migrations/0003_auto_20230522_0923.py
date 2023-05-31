@@ -15,15 +15,19 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='product',
             name='category',
-            field=models.CharField(choices=[('Beef', 'Beef'), ('Lamb', 'Lamb'), ('Chicken', 'Chicken')], default='Beef', max_length=100),
+            field=models.CharField(choices=[('Beef', 'Beef'), ('Lamb', 'Lamb'),
+                                            ('Chicken', 'Chicken')],
+                                   default='Beef', max_length=100),
         ),
         migrations.CreateModel(
             name='Order',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True,
+                                           serialize=False, verbose_name='ID')),  # noqa
                 ('created_on', models.DateTimeField()),
-                ('product_id', models.ManyToManyField(related_name='product_id', to='farmshop.Product')),
-                ('user_id', models.ManyToManyField(related_name='user_id', to=settings.AUTH_USER_MODEL)),
+                ('product_id', models.ManyToManyField(related_name='product_id', to='farmshop.Product')),  # noqa
+                ('user_id', models.ManyToManyField(related_name='user_id',
+                                                   to=settings.AUTH_USER_MODEL)),  # noqa
             ],
         ),
     ]
