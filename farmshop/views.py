@@ -152,7 +152,7 @@ class Login(View):
                 if user is not None:
                     login(request, user)
                     if 'next' in request.GET:
-                        return redirect(request.GET['next'])
+                        return redirect('/')
                     else:
                         return redirect('/')
                 else:

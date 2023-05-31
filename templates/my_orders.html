@@ -3,6 +3,7 @@
 {% block content %}
 
 {% load crispy_forms_tags %}
+
 <h2>Orders</h2>
 
 <pre>{{ message }}</pre>
@@ -10,40 +11,49 @@
 <p>Please call us on 0118 123 4567 to arrange collection of your order at a time that suits you</p>
 
 {% for order in order_list %}
-<h2>Order ID {{ order.id }}</h2>
-
-<table border=1>
-    <tr>
-        <td>Order ID</td>
-        <td>Time</td>
-    </tr>
-    <tr>
-        <td>{{ order.id }}</td>
-        <td>{{ order.created_on }}</td>
-    </tr>
-</table>
-
-    <h3>Products in this order</h3>
-    <table border=1>
-        <tr>
-            <td>Product ID</td>
-            <td>Product Name</td>
-            <td>Price</td>
-            <td>Quantity</td>
-            <td>Line Total</td>
-        </tr>
-        {% for order_item in order.products_list %}
+<h2>Order Details</h2>
+<div class="bg-order-container">
+    <div class="order-container">
+        <table border=1>
+            
+            <h3>Order ID {{ order.id }}</h3>
             <tr>
-                <td>{{ order_item.product.id }}</td>
-                <td>{{ order_item.product.items }}</td>
-                <td>£{{ order_item.product.price }}</td>
-                <td>{{ order_item.quantity }}</td>
-                <td>£{{ order_item.line_total }}</td>
+                <td>Order ID</td>
+                <td>Time</td>
             </tr>
-        {% endfor %}
-        
-    </table>
-    <b>Total Price £{{ order.total_price }}</b>
-{% endfor %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.created_on }}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="order-container">
+        <table border=1>
+            <h3>Products</h3>
+            <tr>
+                <td>Product ID</td>
+                <td>Product Name</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Total</td>
+            </tr>
+            {% for order_item in order.products_list %}
+                <tr>
+                    <td>{{ order_item.product.id }}</td>
+                    <td>{{ order_item.product.items }}</td>
+                    <td>£{{ order_item.product.price }}</td>
+                    <td>{{ order_item.quantity }}</td>
+                    <td>£{{ order_item.line_total }}</td>
+                </tr>
+                
+            {% endfor %}
+        </table>
+    </div>
+</div>
 
+
+    
+
+
+{% endfor %}
 {% endblock %}

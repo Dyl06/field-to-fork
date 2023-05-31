@@ -12,16 +12,6 @@ body {
     max-height: 45vh;
 }
 
-/* .background .overlay {
-    position: absolute;
-    top: 80px;
-    font-weight: bold;
-    text-align: left;
-    font-size: 30px;
-    background: #FFFFFF80;
-    border: 2px solid rgb(73, 74, 74);    
-} */
-
 .bg-head-container {
     display: flex;
     width: 100%;
@@ -190,6 +180,7 @@ button:hover {
 }
 
 /* sale popover */
+
 #sale-popover{
     position: fixed;
     bottom: 0px;
@@ -200,7 +191,26 @@ button:hover {
     padding: 10px;
     display: none;
 }
+
 /* Hiddnig buy now button for empty cart */
 .hidden {
     display: none;
+}
+
+.bg-order-container {
+    display: flex;
+    width: fit-content;
+    height: auto;
+    flex-direction: row;
+    justify-content: left;
+    margin-bottom: 50px;
+    border: #071326 3px solid;
+    padding: 8px;
+}
+
+.order-container {
+    display: flex;
+    height: auto;
+    flex-direction: column;
+    padding: 10px;
 }
