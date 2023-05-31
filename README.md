@@ -1,133 +1,145 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Field to Fork
 
-Welcome Dyl06,
+### Site Purpose
+- Our farm is dedicated to providing local consumers with the highest quality, ethically produced meats. With a deep commitment to transparency and traceability, we offer discerning consumers a delightful and guilt-free option, promoting a healthier lifestyle and supporting the local community.
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+### Site Owner goals
+- As a farmer I would like to sell the meat that I produce on my farm to people in my area. 
+To do this I would like to set up an online store, called FieldToFork.
+The store needs to display the meat I have available for purchase and allows users to scroll through the different products.
+The Users will then be able order the products and come and collect those products from the farm. 
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+### Site Design
+- The design of the website I have created revolves around a user-centric approach, prioritizing good user experience (UX) and user interface (UI). Key aspects of the design focus on simplicity and ease of navigation. The website features a streamlined and intuitive navigation system, ensuring that users can effortlessly explore various sections. With a minimal number of clicks, users can quickly find and purchase desired products, thanks to the strategically placed "buy now" option. Consistency in styling and layout has been maintained throughout the pages, creating a familiar and seamless experience for users. Navigating the website becomes an enjoyable and hassle-free journey, ensuring that users can focus on their needs and goals with utmost convenience.
 
-## Gitpod Reminders
+### Existing Features
+#### -Navigation Bar
+- Hamburger menu is common to many sites and stays consitent across all screen sizes giving users a familiar feel to the site.
+- Field to Fork Heading displayed in the top right corner accross all sites gives users a good UX, while being a subtle reminder of the brand and what site they are part of.
+#### -Landing Page
+- Has a big background image of a wide open countryside that provides users with a good feeling and UX about the farm and the products that they are about to buy and recieve from it.
+- About the Farm - A short description sharing with users the values upheld by the farm. Giving users a sense of trust and understand about what they are possible about to buy.
+- Products Shows a picture of each of the three product categories and a linkto view each specific category.
+#### - Footer
+- Social Media links to facebook twitter and instagram.
+- They display across all pages of the site for good uniformity and UX
+    
+#### -Products
+- Templates with all products avvailable for purchase.
+- Each product has a Name, Description, Weight and Price with a add to basket button below.
+- Three different product categories, - Beef, Lamb and Chicken.
+- Each category has three products within it namely:
+- BEEF: steak, mince, roast
+- LAMB: chops, leg steak, roast
+- CHICKEN: pieces, whole, fillet
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+#### - Basket
+- Users must be registered and logged in
+- Basket is a simple form that allows users to manipulate their current selections of products before it is commited to an order. 
+- Users can Add Subtract or Delete items and they have the ability to add multiple different products to the basket in one session.
+- Basket remains available until logout then it is lost unless user clicks buy now in which case it is a secured order.
+#### - Login
+- login form is a simple username and password from previous registarion for quick and easy logging in to site. 
+- Users are then redirected to the home page and can browse the site without any restriction
+- registration option is available under the login form incase users haven't yet registered
+#### - Register
+- Register form has a user name and password with password confirmation and email address.
+- Hints are found next to each field for easy user registartion.
+- login link is found under the form for users who have previously registered to then login.
+#### - Logout
+- Logout button is easily accesible in the menu and redirects users back to the home page with a succes message saying you have been logged out.
+#### - My Orders
+- Provides users with a detailed breakdown of their order history. 
+- Orders are from newest to oldest with a box around each order for easy readability and good UX
+## Features left to implement
+- Order collection date, users could selet a collection date from a datepicker for collection
+- Delivery, users could get products delivered to them.
+- Likes, Users could like different products that they had tried.
+- Review, users could leave a review on products
+- Newsleter, userss could signup to a newsletter to stay up to date or recieve special offers etc
+## Testing 
+During the creation of this site multiple manual tests were conducted to test the proper running and function of the site.
+User Validation was tested accross the site to ensure username and passwords were entered correctly and in the right format. Django built-in validation and crispy_forms were used to ensure extra validation. 
+-Test to see if user could buy products without being logged in. Login_required functionality was implemented and worked correctly.
+Site navigation was tested and and all buttons clicked in order to make sure the flow of the site worked and that all the templates rendered correctly and the url paths directed to the correct places. 
+MVC (Model, View, Controller) was tested across the site to make sure all UI was implemented and view and controller logic was achieved and maintained throughout site. 
+Login was tested with new user and existing users. Different information was put in to login form to validate that it was working as expected and that all incorrect usernames or passwords or combinations of the two would create expected errors and validation was working. 
+Tried multiple logins on different devices at the same time to make sure the site could handle more then one verified user at the same time, all these tests were passed and site ran as expected 
+Tested to see thay ony logged in users could view a basket and orders page and that they could only view their own baskets or orders pages and not those of other users.
+-Ensure logout functionality would empty the basket so that users would have extra safety and couldn't be charged if someone accessed their devices without them knowing. 
+-Registration was tested to see if invaalid documentation could be added or invallid user inputs. All passed 
+ -Testing to see if you could register with already registered details. Error messaged recieved and didn't allow registration
+ -Tried to register same username with different password or email or combinations of all three. Error messaged apperead and prevented registration.
+ -Email fields in registration and login wanted a combination of @ and . in the correct format for an email.
+ -Passwords need to match and new users need to insert password twice to make sure it works.
+-Javascript was tested manually on the site to see if the function could be broken or manipulated. This included trying to input incorrect data types and trying to reduce order quantity below zero. Code was then corrected if needed and all javascript runs as expected and prevent errors. 
+-Site was tested accross multiple devices and operating systems. 
+-Testing was done by family and friends to make sure they could navigate the site without any issues and utilize all functionality
 
-`python3 -m http.server`
+#### - Validator testing
+        -No errors found when passing through W3c Validator. https://jigsaw.w3.org/css-validator/validator
+        
+#### - Automatic testing
+        - Ran tests in test.py all tests returned without errors.
+        -Ran JLint tests on code in the terminal window.
+        
+#### - Unfixed Bugs
+-If a new user registers to the site and tries to navigate to Orders page they get a 404 error. In future deployments I would like to fix this with a better javascript error message and a redirect.
+-Login redirect goes to the home page rather than the previous add to basket page the user was on before the were forced to login. Would prefer to update this in future deployments to allow for better site navigation.
+-If a user tries to login with an existing username even with different password and email, validation won't allow it but doesn't display reason for error. Just that it is invalid registration. 
 
-A blue button should appear to click: _Make Public_,
+## Deployment
+The code is written in Github.
+The site was deployed to Heroku.
+ElephantSQL has been used to host the database.
+    -The code was created in github and then deployed to Heroku and I used ElephantSQL to host the database.
+    -The site uses the Django Framework which was installed and linked to heroku and ElephantSQL.
 
-Another blue button should appear to click: _Open Browser_.
+The live link to the site can be  found here - 
+    
+## Credits
+#### -Django Helper Documentation
+    -https://www.w3schools.com/html/html_forms.asp
+    -https://docs.djangoproject.com/en/4.2/howto/csrf/
+    -https://docs.djangoproject.com/en/4.2/topics/http/urls/
+    -https://stackoverflow.com/questions/11336548/django-taking-values-from-post-request
+    -https://docs.djangoproject.com/en/4.2/topics/db/queries/#creating-objects
+    -https://realpython.com/django-redirects/
+    -https://www.w3schools.com/django/django_queryset_filter.php
+    -https://docs.djangoproject.com/en/4.2/topics/db/queries/#deleting-objects
+    -https://www.w3schools.com/django/django_queryset_orderby.php orders item in a page.
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+####  -Register/Login/Logout
+        -https://ordinarycoders.com/blog/article/django-user-register-login-logout
 
-A blue button should appear to click: _Make Public_,
+#### -Basket Tutorial
+        -https://www.youtube.com/watch?v=yC5YvGDnhDw
 
-Another blue button should appear to click: _Open Browser_.
+#### -Login Required
+        -http://www.learningaboutelectronics.com/Articles/How-to-specify-the-URL-for-the-login_required-decorator-in-Django.php#:~:text=The%20login_required%20decorator%20is%20a,a%20user%20to%20log%20in.
+        -https://www.fullstackpython.com/django-contrib-auth-decorators-login-required-examples.html
+#### - Hamburger Menu
+        -https://codepen.io/erikterwan/pen/EVzeRP
+        -I used this site to get my hamburger menu and coppied the code into my project with a few minor styling tweaks to make it fit better.
+#### -Font Awesome Icons
+        -https://fontawesome.com/v5/search?q=cart&o=r
+        
+#### - CSS 
+        -https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+        -https://www.w3schools.com/css/css_display_visibility.asp 
+        -setting display to none to hide a button.
+        
+#### - Javascript 
+        -https://stackoverflow.com/questions/30313314/django-how-to-include-javascript-in-template
+        -https://stackoverflow.com/questions/9186346/javascript-onclick-increment-number
+        -https://launchschool.com/books/javascript/read/loops_iterating
+        -https://www.geeksforgeeks.org/how-to-force-input-field-to-enter-numbers-only-using-javascript/
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
-
-To log into the Heroku toolbelt CLI:
-
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
-
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
-
-------
-
-## Release History
-
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
-
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
-
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
-
-**July 2 2021:** Remove extensions that are not available in Open VSX.
-
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
-
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
-
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
-
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
-
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
-
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
-
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
-
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
-
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
-
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
-
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
-
-------
-
-## FAQ about the uptime script
-
-**Why have you added this script?**
-
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
-
-**How will this affect me?**
-
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
-
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
-
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
-
-**So….?**
-
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
-
-**Can I opt out?**
-
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
-
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
-
-**Anything more?**
-
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
-
----
-
-Happy coding!
+#### - Image Convertor 
+        -https://cloudconvert.com/jpeg-to-webp
+        -https://convertio.co/jpeg-webp/
 
 
 
-
-
-# References
-
-https://www.hacksoft.io/blog/introducing-django-enum-choices-2
-
-I used this code to create my three product categories for sale on my sight. Giving each of my individual products a category that they belong to. 
-
-https://docs.djangoproject.com/en/4.2/topics/db/examples/many_to_many/
-
-Used this documentation to figure out how to query the information from the database in a manaytomany field and to display the information contained within the database to the user in the my_orders template. Allowing users to view the orders they have made on the app.
-
-https://www.youtube.com/watch?v=rR8_79NlbVI
-(Between 1:50-2:30 in the video)
-
-I used this video to get the current logged in user_id for displaying the order to that user only. So that they can't see any other users orders. 
-
-https://www.w3schools.com/django/django_queryset_filter.php
-
-Alongside this documentation for the builtin filter() method to select the loggedin user only.
 
 
